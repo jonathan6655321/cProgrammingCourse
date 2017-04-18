@@ -44,7 +44,7 @@ int main(void)
 		return -1;
 	}
 
-	printf("Please enter a number in base %d\n", originalBase);
+	printf("Please enter a number in base %d:\n", originalBase);
 	fflush(stdout);
 	char originalNumberInput[MAXLINE];
 	getLine(originalNumberInput, MAXLINE);
@@ -58,7 +58,7 @@ int main(void)
 	char convertedToTargetBase[MAXLINE];
 	convertFromDecimal(numberInDecimal,targetBase,convertedToTargetBase);
 
-	printf("The result is: %s", convertedToTargetBase);
+	printf("The result is : %s\n", convertedToTargetBase);
 
 
 
@@ -146,7 +146,7 @@ void convertFromDecimal(int numberInDecimal, int targetBase, char result[])
 	result[i] = '\0';
 	i--;
 
-	for (int j = 0; j < i/2; j++ )
+	for (int j = 0; j <= i/2; j++ )
 	{
 		c = result[i - j];
 		result[i-j] = result[j];
