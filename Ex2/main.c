@@ -10,13 +10,19 @@
 
 #define MAX_NUMBER_OF_HEAPS 32
 
-typedef enum {
-	USER, COMPUTER
-} player;
-typedef struct {
-	int number_of_object_taken;
-	int heap_taken_from;
-} move;
+#ifndef __TYPES
+#define __TYPES
+	typedef enum {
+		USER, COMPUTER
+	} player;
+	typedef struct {
+		int number_of_object_taken;
+		int heap_taken_from;
+	} move;
+#endif
+
+
+
 
 int initiate_heaps_by_user_input(int * number_of_heaps, int heaps[]);
 int heap_is_empty(int number_of_heaps, int heaps[]);
@@ -25,6 +31,7 @@ void print_heaps_visualization(int number_of_heaps, int heaps[]);
 void print_win_message(player p);
 void print_and_make_move(player p, move m, int heaps[]);
 move get_move(player p, int number_of_heaps, int  heaps[]);
+
 
 int heaps[MAX_NUMBER_OF_HEAPS];
 int number_of_heaps;

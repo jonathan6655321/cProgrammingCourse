@@ -9,6 +9,7 @@
 
 #define MAX_NUMBER_OF_HEAPS 32
 #define HEAP_REPRESENTATION "*"
+#define HEAP_NONE_REPRESENTATION " "
 
 #define GET_NUMBER_OF_HEAPS_STRING "Enter the number of heaps:\n"
 #define GET_NUMBER_OF_HEAPS_ERROR "Error: the number of heaps must be between 1 and %d.\n"
@@ -20,13 +21,16 @@
 #define USER_WIN_STRING "You win!\n"
 #define COMPUTER_WIN_STRING "Computer wins!\n"
 
-typedef enum {
-	USER, COMPUTER
-} player;
-typedef struct {
-	int number_of_object_taken;
-	int heap_taken_from;
-} move;
+#ifndef __TYPES
+#define __TYPES
+	typedef enum {
+		USER, COMPUTER
+	} player;
+	typedef struct {
+		int number_of_object_taken;
+		int heap_taken_from;
+	} move;
+#endif
 
 void print_turn_info(int turn, int number_of_heaps, int heaps[]);
 void print_heaps_visualization(int number_of_heaps, int heaps[]);
@@ -35,8 +39,7 @@ int max(int array_length, int array[]);
 int initiate_heaps_by_user_input(int * number_of_heaps, int heaps[]);
 int set_number_of_heaps(int * number_of_heaps);
 int set_heaps_sizes(int number_of_heaps, int heaps[]);
-int check_heaps(int number_of_heaps, int heaps[]);
-void print_and_make_move(player p, move m, int heaps[]);
+	void print_and_make_move(player p, move m, int heaps[]);
 
 void print_turn_info(int turn, int number_of_heaps, int heaps[]) {
 	printf(TURN_INFO_STRING, turn);
@@ -58,11 +61,15 @@ void print_heaps_visualization(int number_of_heaps, int heaps[]) {
 	for (int line = max_heap; line > 0; line--) {
 		if (heaps[0] >= line) {
 			printf(HEAP_REPRESENTATION);
+		}else{
+			printf(HEAP_NONE_REPRESENTATION);
 		}
 		for (int i = 1; i < number_of_heaps; i++) {
 			printf("\t");
 			if (heaps[i] >= line) {
 				printf(HEAP_REPRESENTATION);
+			}else{
+				printf(HEAP_NONE_REPRESENTATION);
 			}
 		}
 		printf("\n");
@@ -114,17 +121,10 @@ int set_heaps_sizes(int number_of_heaps, int heaps[]) {
 	printf(GET_HEAPS_SIZES_STRING);
 	for (int i = 0; i < number_of_heaps; i++) {
 		scanf("%d", &heaps[i]);
-	}
-	return check_heaps(number_of_heaps, heaps);
-}
-
-int check_heaps(int number_of_heaps, int heaps[]) {
-	for (int i = 0; i < number_of_heaps; i++) {
-		if (heaps[i] < 0) {
+		if(heaps[i] < 0){
 			printf(GET_HEAPS_SIZES_ERROR_TOO_LOW, i + 1);
 			return 0;
 		}
 	}
 	return 1;
 }
-
