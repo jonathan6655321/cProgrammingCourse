@@ -53,7 +53,7 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 			currentSpanScore = 0;
 			for(k=0; k < 4; k++)
 			{
-				if((game->gameBoard)[i][j+k] == SP_FIAR_GAME_PLAYERS_SYMBOL[0])
+				if((game->gameBoard)[i][j+k] == SP_FIAR_GAME_PLAYERS_SYMBOL(0))
 				{
 					currentSpanScore++;
 				} else
@@ -86,7 +86,7 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 			currentSpanScore = 0;
 			for(k=0; k < 4; k++)
 			{
-				if((game->gameBoard)[i+k][j] == SP_FIAR_GAME_PLAYERS_SYMBOL[0])
+				if((game->gameBoard)[i+k][j] == SP_FIAR_GAME_PLAYERS_SYMBOL(0))
 				{
 					currentSpanScore++;
 				} else
@@ -119,7 +119,7 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 			currentSpanScore = 0;
 			for(k=0; k < 4; k++)
 			{
-				if((game->gameBoard)[i+k][j+k] == SP_FIAR_GAME_PLAYERS_SYMBOL[0])
+				if((game->gameBoard)[i+k][j+k] == SP_FIAR_GAME_PLAYERS_SYMBOL(0))
 				{
 					currentSpanScore++;
 				} else
@@ -152,7 +152,7 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 			currentSpanScore = 0;
 			for(k=0; k < 4; k++)
 			{
-				if((game->gameBoard)[i+k][j-k] == SP_FIAR_GAME_PLAYERS_SYMBOL[0])
+				if((game->gameBoard)[i+k][j-k] == SP_FIAR_GAME_PLAYERS_SYMBOL(0))
 				{
 					currentSpanScore++;
 				} else
