@@ -1,10 +1,13 @@
 #include "SPFIARGame.h"
 
+const char SP_FIAR_GAME_PLAYERS_SYMBOL[2] = { SP_FIAR_GAME_PLAYER_1_SYMBOL,
+		SP_FIAR_GAME_PLAYER_2_SYMBOL };
+
 SPFiarGame* spFiarGameCreate(int historySize) {
 	if (historySize < 0) {
 		return 0;
 	}
-	SPFiarGame* spfiargame = calloc(sizeof(SPFiarGame));
+	SPFiarGame* spfiargame = calloc(1, sizeof(SPFiarGame));
 	if (!spfiargame) {
 		printf(FUNCTION_ERROR, "calloc");
 		return 0;
@@ -12,7 +15,7 @@ SPFiarGame* spFiarGameCreate(int historySize) {
 	memset(spfiargame->gameBoard, SP_FIAR_GAME_EMPTY_ENTRY,
 			sizeof(spfiargame->gameBoard)); //set everything to " "
 	spfiargame->historySize = historySize;
-	spfiargame->history_turns_array = spArrayListCreate(historySize * 2);
+	spfiargame->history_turns_array = spArrayListCreate(historySize); // 1 turn per player TODO
 	if (!spfiargame->history_turns_array) {
 		free(spfiargame);
 		return 0;
@@ -37,13 +40,13 @@ SPFiarGame* spFiarGameCopy(SPFiarGame* src) {
 }
 
 SP_FIAR_GAME_MESSAGE spFiarGameSetMove(SPFiarGame* src, int col) {
-	if (!src || col < 0 || col > SP_FIAR_GAME_N_COLUMNS - 1) {
+	if ((!src) || (col < 0) || (col > SP_FIAR_GAME_N_COLUMNS - 1)) {
 		return SP_FIAR_GAME_INVALID_ARGUMENT;
-	} else if (spFiarGameIsValidMove(src, col)) {
+	} else if (!spFiarGameIsValidMove(src, col)) {
 		return SP_FIAR_GAME_INVALID_MOVE;
 	}
 	src->gameBoard[src->tops[col]][col] =
-			SP_FIAR_GAME_PLAYERS_SYMBOL[src->currentPlayer];
+			SP_FIAR_GAME_PLAYERS_SYMBOL[(int) src->currentPlayer];
 	spArrayListPush(src->history_turns_array, col);
 	src->tops[col]++;
 	src->currentPlayer = !src->currentPlayer;
@@ -51,7 +54,7 @@ SP_FIAR_GAME_MESSAGE spFiarGameSetMove(SPFiarGame* src, int col) {
 }
 
 bool spFiarGameIsValidMove(SPFiarGame* src, int col) {
-	return src->tops[col] != SP_FIAR_GAME_N_ROWS;
+	return src->tops[col] != SP_FIAR_GAME_N_ROWS; //TODO < ??
 }
 
 SP_FIAR_GAME_MESSAGE spFiarGameUndoPrevMove(SPFiarGame* src) {
@@ -71,7 +74,7 @@ char spFiarGameGetCurrentPlayer(SPFiarGame* src) {
 	if (!src) {
 		return SP_FIAR_GAME_EMPTY_ENTRY;
 	}
-	return SP_FIAR_GAME_PLAYERS_SYMBOL[src->currentPlayer];
+	return SP_FIAR_GAME_PLAYERS_SYMBOL[(int) src->currentPlayer];
 }
 
 char spFiarCheckWinnerHorizontal(SPFiarGame* src) {

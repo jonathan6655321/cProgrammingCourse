@@ -15,16 +15,8 @@ bool spParserIsInt(const char* str) {
 	}
 	for (; i < len; i++) {
 		c = str[i];
-		if (c <= '0') {
+		if (c < '0' || c > '9') {
 			return 0;
-		} else {
-			c -= '0';
-			if ((c > 0 && (len - i) > 1) || (c > 7 && (len - i) = 1)) {
-				return 0;
-			}
-			if (c > 9) {
-				return 0;
-			}
 		}
 	}
 	return 1;
@@ -50,12 +42,17 @@ int spPaserPraseInt(char* str) {
 SPCommand spParserPraseLine(const char* str) {
 	char dest[1024];
 	strcpy(dest, str);
-	char* number;
+//	char* number;
 	SPCommand spcommand;
 	char* delimeter = " ,.\n\t\r";
 	char* token = strtok(dest, delimeter);
 	spcommand.cmd = spPaserPraseCommand(token);
-	token = strtok(dest, delimeter);
+	if (spcommand.cmd == SP_INVALID_LINE)
+	{
+		spcommand.validArg = 0;
+		return spcommand;
+	}
+	token = strtok(NULL, delimeter);
 	spcommand.validArg = spParserIsInt(token);
 	if (spcommand.validArg) {
 		spcommand.arg = spPaserPraseInt(token);
@@ -69,7 +66,7 @@ SP_COMMAND spPaserPraseCommand(char* str) {
 	}
 	if (strcmp(str, "undo_move") == 0) {
 		return SP_UNDO_MOVE;
-	} else if (strcmp(str, "add_disk") == 0) {
+	} else if (strcmp(str, "add_disc") == 0) {
 		return SP_ADD_DISC;
 	} else if (strcmp(str, "suggest_move") == 0) {
 		return SP_SUGGEST_MOVE;
