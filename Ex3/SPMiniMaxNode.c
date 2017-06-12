@@ -43,8 +43,123 @@ void spMiniMaxNodeDestroy(SPMiniMaxNode* node) {
 }
 
 int calculateGameUtilityValue(SPFiarGame* game) {
-	//=====================================================================
-	return 0;
+	int spanScores [6] = {0,0,0,0,0,0}; // -3,-2,-1,1,2,3
+	int weights[6] = {-5,-2,-1,1,2,5};
+
+	// count horizontal 4's:
+	int i, j, k, currentSpanScore;
+	for (i = 0; i < SP_FIAR_GAME_N_ROWS; i++) {
+		for (j = 0; j < SP_FIAR_GAME_N_COLUMNS-3; j++) {
+			currentSpanScore = 0;
+			for(k=0; k < 4; k++)
+			{
+				if((game->gameBoard)[i][j+k] == SP_FIAR_GAME_PLAYERS_SYMBOL[0])
+				{
+					currentSpanScore++;
+				} else
+				{
+					currentSpanScore--;
+				}
+			}
+			if (currentSpanScore == 4)
+			{
+				return INT_MAX;
+			} else if (currentSpanScore == -4)
+			{
+				return INT_MIN;
+			}else {
+				spanScores[currentSpanScore + 3]++;
+			}
+		}
+	}
+
+	// count vertical 4's:
+	int i, j, k, currentSpanScore;
+	for (j = 0; j < SP_FIAR_GAME_N_COLUMNS; j++) {
+		for (i = 0; i < SP_FIAR_GAME_N_ROWS-3; i++) {
+			currentSpanScore = 0;
+			for(k=0; k < 4; k++)
+			{
+				if((game->gameBoard)[i+k][j] == SP_FIAR_GAME_PLAYERS_SYMBOL[0])
+				{
+					currentSpanScore++;
+				} else
+				{
+					currentSpanScore--;
+				}
+			}
+			if (currentSpanScore == 4)
+			{
+				return INT_MAX;
+			} else if (currentSpanScore == -4)
+			{
+				return INT_MIN;
+			}else {
+				spanScores[currentSpanScore + 3]++;
+			}
+		}
+	}
+
+	// count diagonals 4's (top left to bottom right)
+	int i, j, k, currentSpanScore;
+	for (i = 0; i < SP_FIAR_GAME_N_ROWS-3; i++) {
+		for (j = 0; j < SP_FIAR_GAME_N_COLUMNS-3; j++) {
+			currentSpanScore = 0;
+			for(k=0; k < 4; k++)
+			{
+				if((game->gameBoard)[i+k][j+k] == SP_FIAR_GAME_PLAYERS_SYMBOL[0])
+				{
+					currentSpanScore++;
+				} else
+				{
+					currentSpanScore--;
+				}
+			}
+			if (currentSpanScore == 4)
+			{
+				return INT_MAX;
+			} else if (currentSpanScore == -4)
+			{
+				return INT_MIN;
+			}else {
+				spanScores[currentSpanScore + 3]++;
+			}
+		}
+	}
+
+	// count diagonals 4's (top right to bottom left)
+	int i, j, k, currentSpanScore;
+	for (i = 0; i < SP_FIAR_GAME_N_ROWS-3; i++) {
+		for (j = 3; j < SP_FIAR_GAME_N_COLUMNS; j++) {
+			currentSpanScore = 0;
+			for(k=0; k < 4; k++)
+			{
+				if((game->gameBoard)[i+k][j-k] == SP_FIAR_GAME_PLAYERS_SYMBOL[0])
+				{
+					currentSpanScore++;
+				} else
+				{
+					currentSpanScore--;
+				}
+			}
+			if (currentSpanScore == 4)
+			{
+				return INT_MAX;
+			} else if (currentSpanScore == -4)
+			{
+				return INT_MIN;
+			}else {
+				spanScores[currentSpanScore + 3]++;
+			}
+		}
+	}
+
+	int totalScore = 0;
+	for (int i = 0; i < 6; i++)
+	{
+		totalScore += weights[i]*spanScores[i];
+	}
+	return totalScore;
 }
 
 int getNodeUtilityValue(SPMiniMaxNode* node) {
