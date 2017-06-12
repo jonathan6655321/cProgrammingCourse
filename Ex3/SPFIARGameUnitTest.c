@@ -59,6 +59,7 @@ static bool spFiarGameUndoMoveTest() {
 
 static bool spFiarGameSetMoveTest() {
 	SPFiarGame* res = spFiarGameCreate(HISTORY_SIZE);
+//	printf("does res == null? %s\n", res == 0 ? "yes":"no");
 	ASSERT_TRUE(res!=NULL);
 	int repeat = 2;
 	while (repeat-- > 0) {

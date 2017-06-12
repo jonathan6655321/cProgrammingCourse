@@ -1,14 +1,14 @@
 #include "SPArrayList.h"
 
 SPArrayList* spArrayListCreate(int maxSize) {
-	SPArrayList* sparraylist = calloc(sizeof(SPArrayList));
+	SPArrayList* sparraylist = calloc(1,sizeof(SPArrayList)); // TODO
 	if (!sparraylist) {
 		printf(FUNCTION_ERROR, "calloc");
 		return 0;
 	}
 	sparraylist->maxSize = maxSize;
 	sparraylist->actualSize = 0;
-	sparraylist->elements = calloc(sizeof(int) * maxSize);
+	sparraylist->elements = calloc(maxSize, sizeof(int)); // TODO
 	if (!(sparraylist->elements)) {
 		free(sparraylist);
 		printf(FUNCTION_ERROR, "calloc");
@@ -127,7 +127,9 @@ SP_ARRAY_LIST_MESSAGE spArrayListRemoveLast(SPArrayList* src) {
 	} else if (spArrayListIsEmpty(src)) {
 		return SP_ARRAY_LIST_EMPTY;
 	}
+//	printf("actual size before: %d\n", src->actualSize); TODO delete this
 	src->actualSize--;
+//	printf("actual size after: %d\n", src->actualSize); TODO delete this
 	return SP_ARRAY_LIST_SUCCESS;
 }
 

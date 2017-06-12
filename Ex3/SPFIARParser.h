@@ -1,6 +1,8 @@
 #ifndef SPFIARPARSER_H_
 #define SPFIARPARSER_H_
 #include <stdbool.h>
+#include <stdio.h>
+#include <string.h>
 
 //specify the maximum line length
 #define SP_MAX_LINE_LENGTH 1024
@@ -62,6 +64,6 @@ SP_COMMAND spPaserPraseCommand(char* str);
  * @return
  * A parsed int that contains the value of str in base 10 between 1 to 7 only.
  */
-SP_COMMAND spPaserPraseInt(char* str);
+int spPaserPraseInt(char* str); // return value was SP_COMMAND
 
 #endif
