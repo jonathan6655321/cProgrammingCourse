@@ -68,7 +68,14 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 			{
 				return INT_MIN;
 			}else {
-				spanScores[currentSpanScore + 3]++;
+				if(currentSpanScore < 0)
+					{
+						spanScores[currentSpanScore + 3]++;
+					}
+				else if (currentSpanScore > 0)
+					{
+						spanScores[currentSpanScore + 2]++;
+					}
 			}
 		}
 	}
@@ -94,7 +101,14 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 			{
 				return INT_MIN;
 			}else {
-				spanScores[currentSpanScore + 3]++;
+				if(currentSpanScore < 0)
+					{
+						spanScores[currentSpanScore + 3]++;
+					}
+				else if (currentSpanScore > 0)
+					{
+						spanScores[currentSpanScore + 2]++;
+					}
 			}
 		}
 	}
@@ -120,7 +134,14 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 			{
 				return INT_MIN;
 			}else {
-				spanScores[currentSpanScore + 3]++;
+				if(currentSpanScore < 0)
+				{
+					spanScores[currentSpanScore + 3]++;
+				}
+				else if (currentSpanScore > 0)
+				{
+					spanScores[currentSpanScore + 2]++;
+				}
 			}
 		}
 	}
@@ -146,7 +167,14 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 			{
 				return INT_MIN;
 			}else {
-				spanScores[currentSpanScore + 3]++;
+				if(currentSpanScore < 0)
+				{
+					spanScores[currentSpanScore + 3]++;
+				}
+				else if (currentSpanScore > 0)
+				{
+					spanScores[currentSpanScore + 2]++;
+				}
 			}
 		}
 	}
