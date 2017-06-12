@@ -74,7 +74,6 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 	}
 
 	// count vertical 4's:
-	int i, j, k, currentSpanScore;
 	for (j = 0; j < SP_FIAR_GAME_N_COLUMNS; j++) {
 		for (i = 0; i < SP_FIAR_GAME_N_ROWS-3; i++) {
 			currentSpanScore = 0;
@@ -101,7 +100,6 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 	}
 
 	// count diagonals 4's (top left to bottom right)
-	int i, j, k, currentSpanScore;
 	for (i = 0; i < SP_FIAR_GAME_N_ROWS-3; i++) {
 		for (j = 0; j < SP_FIAR_GAME_N_COLUMNS-3; j++) {
 			currentSpanScore = 0;
@@ -128,7 +126,6 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 	}
 
 	// count diagonals 4's (top right to bottom left)
-	int i, j, k, currentSpanScore;
 	for (i = 0; i < SP_FIAR_GAME_N_ROWS-3; i++) {
 		for (j = 3; j < SP_FIAR_GAME_N_COLUMNS; j++) {
 			currentSpanScore = 0;
