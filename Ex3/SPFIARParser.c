@@ -1,6 +1,9 @@
 #include "SPFIARParser.h"
 
 bool spParserIsInt(const char* str) {
+	if (!str) {
+		return 0;
+	}
 	int len = strlen(str);
 	if (len == 0) { //str == ""
 		return 0;
@@ -56,9 +59,17 @@ SPCommand spParserPraseLine(const char* str) {
 	char* token = strtok(dest, delimeter);
 	spcommand.cmd = spPaserPraseCommand(token);
 	token = strtok(dest, delimeter);
-	spcommand.validArg = spParserIsInt(token);
-	if (spcommand.validArg) {
-		spcommand.arg = spPaserPraseInt(token);
+	if (spcommand.cmd == SP_ADD_DISC) {
+		spcommand.validArg = spParserIsInt(token);
+		if (spcommand.validArg) {
+			spcommand.arg = spPaserPraseInt(token);
+		}
+	} else {
+		if(!token){
+			spcommand.validArg = 1;
+		}else{
+			spcommand.validArg = 0;
+		}
 	}
 	return spcommand;
 }
