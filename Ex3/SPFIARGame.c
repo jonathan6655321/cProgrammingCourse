@@ -47,7 +47,7 @@ SP_FIAR_GAME_MESSAGE spFiarGameSetMove(SPFiarGame* src, int col) {
 		return SP_FIAR_GAME_INVALID_MOVE;
 	}
 	src->gameBoard[src->tops[col]][col] =
-			SP_FIAR_GAME_PLAYERS_SYMBOL[(int) src->currentPlayer];
+			SP_FIAR_GAME_PLAYERS_SYMBOL((int) src->currentPlayer);
 	spArrayListPush(src->history_turns_array, col);
 	src->tops[col]++;
 	src->currentPlayer = !src->currentPlayer;
@@ -80,7 +80,7 @@ char spFiarGameGetCurrentPlayer(SPFiarGame* src) {
 	if (!src) {
 		return SP_FIAR_GAME_EMPTY_ENTRY;
 	}
-	return SP_FIAR_GAME_PLAYERS_SYMBOL[(int) src->currentPlayer];
+	return SP_FIAR_GAME_PLAYERS_SYMBOL((int) src->currentPlayer);
 }
 
 char spFiarCheckWinnerHorizontal(SPFiarGame* src) {

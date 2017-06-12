@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include "SPFIARGame.h"
+#include "SPFIARParser.h"
+#include "SPMiniMax.h"
 
 #define HISTORY_SIZE 20
 #define DIFFICULTY_LEVEL_STRING "Please enter the difficulty level between [1-7]:\n"
@@ -18,18 +20,19 @@
 #define RESTARTING_STRING "Game restarted!\n"
 #define NO_HISTORY_ERROR_STRING "Error: cannot undo previous move!\n"
 #define NOT_ALLOWED_COMMANDS "Error: the game is over\n"
+#define NEXT_MOVE_STRING "Please make the next move:\n"
 
 void initializeGame(SPFiarGame** spfiargame, int* maxDepth);
 
 SPCommand getNextCommand();
 
-void addDisk(SPCommand spCommand, SPFiarGame* spfiargame, int* gameIsRunning,
+int addDisk(SPCommand spCommand, SPFiarGame* spfiargame, int* gameIsRunning,
 		int maxDepth);
 
 void checkWinner(SPFiarGame* spfiargame, int* gameIsRunning);
 
-void addEnemyMove(SPFiarGame* spfiargame, int* gameIsRunning, int maxDepth);
+void addEnemyMove(SPFiarGame* spfiargame, int maxDepth);
 
-void undoMove(SPFiarGame* spfiargame);
+int undoMove(SPFiarGame* spfiargame);
 
 #endif
