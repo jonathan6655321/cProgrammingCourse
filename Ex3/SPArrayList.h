@@ -274,7 +274,7 @@ SP_ARRAY_LIST_MESSAGE spArrayListPush(SPArrayList* src, int elem);
  * @return
  * the element returned or -1 otherwise.
  */
-int spArrayListPop(SPArrayList* src, int elem);
+int spArrayListPop(SPArrayList* src);
 
 
 #endif

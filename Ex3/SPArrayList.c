@@ -160,7 +160,7 @@ SP_ARRAY_LIST_MESSAGE spArrayListPush(SPArrayList* src, int elem){
 	return spArrayListAddLast(src, elem);
 }
 
-int spArrayListPop(SPArrayList* src, int elem){
+int spArrayListPop(SPArrayList* src){
 	if (!src || spArrayListIsEmpty(src)) {
 		return -1;
 	}
