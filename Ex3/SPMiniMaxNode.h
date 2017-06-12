@@ -4,11 +4,11 @@
 #ifndef SPMINIMAXNODE_H_
 #define SPMINIMAXNODE_H_
 
-typedef struct MiniMaxNode {
+typedef struct SPMiniMaxNode {
 	SPFiarGame* game;
 	int currentHeight;
 	int utilityValue;
-	SPMiniMaxNode* children[7];
+	struct SPMiniMaxNode* children[7];
 } SPMiniMaxNode;
 
 SPMiniMaxNode* spMiniMaxNodeCreate(SPFiarGame* game, int currentHeight);
