@@ -1,5 +1,8 @@
 #include "SPFIARGame.h"
 
+#define UNDO_MOVE_COMPUTER_STRING "Remove disc: remove computer’s disc at column %d\n"
+#define UNDO_MOVE_PLAYER_STRING "Remove disc: remove user’s disc at column %d\n”"
+
 const char SP_FIAR_GAME_PLAYERS_SYMBOL[2] = { SP_FIAR_GAME_PLAYER_1_SYMBOL,
 		SP_FIAR_GAME_PLAYER_2_SYMBOL };
 
@@ -64,6 +67,11 @@ SP_FIAR_GAME_MESSAGE spFiarGameUndoPrevMove(SPFiarGame* src) {
 		return SP_FIAR_GAME_NO_HISTORY;
 	}
 	int col = spArrayListPop(src->history_turns_array);
+	if (src->currentPlayer) {
+		printf(UNDO_MOVE_COMPUTER_STRING, col);
+	} else {
+		printf(UNDO_MOVE_PLAYER_STRING, col);
+	}
 	src->tops[col]--;
 	src->gameBoard[src->tops[col]][col] = SP_FIAR_GAME_EMPTY_ENTRY;
 	src->currentPlayer = !src->currentPlayer;
