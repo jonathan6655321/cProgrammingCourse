@@ -1,10 +1,12 @@
-
 #!/bin/bash
 
 make SPFIARGameUnitTest
 ./SPFIARGameUnitTest
-make SPArrayListUnitTest
-./SPArrayListUnitTest
+
 make SPFIARParserUnitTest
 ./SPFIARParserUnitTest
+
+make SPArrayListUnitTest
+./SPArrayListUnitTest
+
 
