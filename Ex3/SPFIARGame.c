@@ -3,8 +3,6 @@
 #define UNDO_MOVE_COMPUTER_STRING "Remove disc: remove computer’s disc at column %d\n"
 #define UNDO_MOVE_PLAYER_STRING "Remove disc: remove user’s disc at column %d\n”"
 
-const char SP_FIAR_GAME_PLAYERS_SYMBOL[2] = { SP_FIAR_GAME_PLAYER_1_SYMBOL,
-		SP_FIAR_GAME_PLAYER_2_SYMBOL };
 
 SPFiarGame* spFiarGameCreate(int historySize) {
 	if (historySize < 0) {
