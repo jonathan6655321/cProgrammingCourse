@@ -1,8 +1,8 @@
 #include "SPMainAux.h"
 
 int main() {
-	SPFiarGame* spfiargame;
-	int maxDepth;
+	SPFiarGame* spfiargame = 0;
+	int maxDepth = 0;
 
 	initializeGame(&spfiargame, &maxDepth);
 	int gameIsRunning = 1;
@@ -20,7 +20,8 @@ int main() {
 			switch (spCommand.cmd) {
 			case SP_ADD_DISC:
 				if (gameIsRunning) {
-					needToPrint = addDisk(spCommand, spfiargame, &gameIsRunning, maxDepth);
+					needToPrint = addDisk(spCommand, spfiargame, &gameIsRunning,
+							maxDepth);
 				} else {
 					printf(NOT_ALLOWED_COMMANDS);
 				}

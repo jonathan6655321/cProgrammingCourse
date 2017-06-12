@@ -12,6 +12,9 @@ bool spParserIsInt(const char* str) {
 	}
 	int i = 0;
 	char c;
+	if (str[len-1] == '\n') {
+		len--;
+	}
 	if (str[0] == '-') {
 		if (len == 1) { // str == '-'
 			return 0;

@@ -4,18 +4,19 @@ void initializeGame(SPFiarGame** spfiargame, int* maxDepth) {
 	if (!(!(*spfiargame))) {
 		spFiarGameDestroy((*spfiargame));
 	}
-	int i;
 	printf(DIFFICULTY_LEVEL_STRING);
 	char str[1024];
-	i = scanf("%s", str);
-	if (strcmp(str, "quit")) {
+	fgets(str, sizeof(str), stdin);
+	if (strcmp(str, "quit") == 0) {
+		printf(EXITING_STRING);
 		abort();
 	}
-	while (i == 0 || (!spParserIsInt(str))) {
+	while (!spParserIsInt(str)) {
 		printf(INVALID_DIFFICULTY_LEVEL_ERROR_STRING);
 		printf(DIFFICULTY_LEVEL_STRING);
-		i = scanf("%s", str);
-		if (strcmp(str, "quit")) {
+		fgets(str, sizeof(str), stdin);
+		if (strcmp(str, "quit") == 0) {
+			printf(EXITING_STRING);
 			abort();
 		}
 	}
@@ -33,7 +34,7 @@ SPCommand getNextCommand() {
 int addDisk(SPCommand spCommand, SPFiarGame* spfiargame, int* gameIsRunning,
 		int maxDepth) {
 	SP_FIAR_GAME_MESSAGE retMessage = spFiarGameSetMove(spfiargame,
-			spCommand.arg);
+			spCommand.arg - 1);
 
 	if (retMessage == SP_FIAR_GAME_INVALID_ARGUMENT) {
 		printf(INVALID_COMMAND_STRING);
@@ -43,7 +44,7 @@ int addDisk(SPCommand spCommand, SPFiarGame* spfiargame, int* gameIsRunning,
 		return 0;
 	}
 	checkWinner(spfiargame, gameIsRunning);
-	if (*gameIsRunning) {
+	if (*gameIsRunning && 0) {
 		addEnemyMove(spfiargame, maxDepth);
 		checkWinner(spfiargame, gameIsRunning);
 	}
