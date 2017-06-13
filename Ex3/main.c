@@ -2,7 +2,7 @@
 
 int main() {
 	SPFiarGame* spfiargame = 0;
-	int maxDepth = 0;
+	unsigned int maxDepth = 0;
 
 	initializeGame(&spfiargame, &maxDepth);
 	int gameIsRunning = 1;
@@ -50,13 +50,19 @@ int main() {
 				continue;
 
 			case SP_QUIT:
-				break;
+				printf(EXITING_STRING);
+				spFiarGameDestroy(spfiargame);
+				return 0;
 			case SP_INVALID_LINE:
 				printf(INVALID_COMMAND_STRING);
 				continue;
 			}
 		}
-		printf(INVALID_COMMAND_STRING);
+		if (spCommand.cmd == SP_ADD_DISC) {
+			printf(INVALID_COLOMN_NUMBER);
+		} else {
+			printf(INVALID_COMMAND_STRING);
+		}
 	}
 	printf(EXITING_STRING);
 	spFiarGameDestroy(spfiargame);

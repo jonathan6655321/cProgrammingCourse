@@ -4,7 +4,7 @@ SPArrayList* spArrayListCreate(int maxSize) {
 	SPArrayList* sparraylist = calloc(1,sizeof(SPArrayList)); // TODO
 	if (!sparraylist) {
 		printf(FUNCTION_ERROR, "calloc");
-		return 0;
+		abort();
 	}
 	sparraylist->maxSize = maxSize;
 	sparraylist->actualSize = 0;
@@ -12,7 +12,7 @@ SPArrayList* spArrayListCreate(int maxSize) {
 	if (!(sparraylist->elements)) {
 		free(sparraylist);
 		printf(FUNCTION_ERROR, "calloc");
-		return 0;
+		abort();
 	}
 	return sparraylist;
 }

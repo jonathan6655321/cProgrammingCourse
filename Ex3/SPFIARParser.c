@@ -10,11 +10,11 @@ bool spParserIsInt(const char* str) {
 	if (len == 0) { //str == ""
 		return 0;
 	}
-	int i = 0;
-	char c;
-	if (str[len-1] == '\n') {
+	if (str[len - 1] == '\n') {
 		len--;
 	}
+	int i = 0;
+	char c;
 	if (str[0] == '-') {
 		if (len == 1) { // str == '-'
 			return 0;
@@ -31,10 +31,14 @@ bool spParserIsInt(const char* str) {
 }
 
 int spPaserPraseInt(char* str) {
+	printf("%s\n", str);
 	int len = strlen(str);
 	int x = 1;
 	int base = 10;
 	int ret = 0;
+	if (str[len - 1] == '\n') {
+		len--;
+	}
 	while (len > 1) {
 		ret += (str[len - 1] - '0') * x;
 		x *= base;

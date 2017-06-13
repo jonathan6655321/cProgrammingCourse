@@ -11,16 +11,12 @@ SPFiarGame* spFiarGameCreate(int historySize) {
 	SPFiarGame* spfiargame = calloc(1, sizeof(SPFiarGame));
 	if (!spfiargame) {
 		printf(FUNCTION_ERROR, "calloc");
-		return 0;
+		abort();
 	}
 	memset(spfiargame->gameBoard, SP_FIAR_GAME_EMPTY_ENTRY,
 			sizeof(spfiargame->gameBoard)); //set everything to " "
 	spfiargame->historySize = historySize;
 	spfiargame->history_turns_array = spArrayListCreate(historySize); // 1 turn per player TODO
-	if (!spfiargame->history_turns_array) {
-		free(spfiargame);
-		return 0;
-	}
 	return spfiargame;
 
 }

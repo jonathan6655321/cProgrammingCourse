@@ -1,27 +1,27 @@
 #include "SPMainAux.h"
 
-void initializeGame(SPFiarGame** spfiargame, int* maxDepth) {
+void initializeGame(SPFiarGame** spfiargame, unsigned int* maxDepth) {
 	if (!(!(*spfiargame))) {
 		spFiarGameDestroy((*spfiargame));
 	}
 	printf(DIFFICULTY_LEVEL_STRING);
 	char str[1024];
 	fgets(str, sizeof(str), stdin);
-	if (strcmp(str, "quit") == 0) {
+	if (strncmp(str, "quit", 4) == 0) {
 		printf(EXITING_STRING);
-		abort();
+		exit(0);
 	}
 	while (!spParserIsInt(str)) {
 		printf(INVALID_DIFFICULTY_LEVEL_ERROR_STRING);
 		printf(DIFFICULTY_LEVEL_STRING);
 		fgets(str, sizeof(str), stdin);
-		if (strcmp(str, "quit") == 0) {
+		if (strncmp(str, "quit", 4) == 0) {
 			printf(EXITING_STRING);
-			abort();
+			exit(0);
 		}
 	}
-	(*maxDepth) = spPaserPraseInt(str);
 
+	(*maxDepth) = (unsigned int) spPaserPraseInt(str);;
 	(*spfiargame) = spFiarGameCreate(HISTORY_SIZE);
 }
 
@@ -40,11 +40,11 @@ int addDisk(SPCommand spCommand, SPFiarGame* spfiargame, int* gameIsRunning,
 		printf(INVALID_COMMAND_STRING);
 		return 0;
 	} else if (retMessage == SP_FIAR_GAME_INVALID_MOVE) {
-		printf(INVALID_COLOMN_NUMBER);
+		printf(COLUMN_FULL_ERROR_STRING, spCommand.arg);
 		return 0;
 	}
 	checkWinner(spfiargame, gameIsRunning);
-	if (*gameIsRunning && 0) {
+	if (*gameIsRunning) {
 		addEnemyMove(spfiargame, maxDepth);
 		checkWinner(spfiargame, gameIsRunning);
 	}
