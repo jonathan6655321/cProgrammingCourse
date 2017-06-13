@@ -31,7 +31,7 @@ int main() {
 				if (gameIsRunning) {
 					int optimalMove = spMinimaxSuggestMove(spfiargame,
 							maxDepth);
-					printf(SUGGEST_MOVE_STRING, optimalMove);
+					printf(SUGGEST_MOVE_STRING, optimalMove + 1);
 				} else {
 					printf(NOT_ALLOWED_COMMANDS);
 				}

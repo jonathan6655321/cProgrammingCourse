@@ -70,7 +70,7 @@ void checkWinner(SPFiarGame* spfiargame, int* gameIsRunning) {
 
 void addEnemyMove(SPFiarGame* spfiargame, int maxDepth) {
 	int optimalMove = spMinimaxSuggestMove(spfiargame, maxDepth);
-	printf(COMPUTER_MOVE_STRING, optimalMove);
+	printf(COMPUTER_MOVE_STRING, optimalMove + 1);
 	spFiarGameSetMove(spfiargame, optimalMove);
 }
 

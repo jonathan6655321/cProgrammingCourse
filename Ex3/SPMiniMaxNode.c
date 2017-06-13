@@ -32,7 +32,7 @@ SPMiniMaxNode* spMiniMaxNodeCreate(SPFiarGame* game, int currentHeight) {
 
 void spMiniMaxNodeDestroy(SPMiniMaxNode* node) {
 	for (int i = 0; i < 7; i++) {
-		if (!(node->children[i])) {
+		if (node->children[i]) {
 			spMiniMaxNodeDestroy(node->children[i]);
 		}
 	}

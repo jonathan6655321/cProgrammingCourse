@@ -3,7 +3,6 @@
 #define SPMINIMAXNODE_H_
 #include "SPFIARGame.h"
 #include "limits.h"
-#include <assert.h>
 
 typedef struct SPMiniMaxNode {
 	SPFiarGame* game;
