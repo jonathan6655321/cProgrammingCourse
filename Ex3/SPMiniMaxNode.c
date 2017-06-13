@@ -46,15 +46,15 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 
 	// count horizontal 4's:
 	int i, j, k, currentSpanScore;
+	char currentChar;
 	for (i = 0; i < SP_FIAR_GAME_N_ROWS; i++) {
 		for (j = 0; j < SP_FIAR_GAME_N_COLUMNS - 3; j++) {
 			currentSpanScore = 0;
 			for (k = 0; k < 4; k++) {
-				if ((game->gameBoard)[i][j + k]
-						== SP_FIAR_GAME_PLAYERS_SYMBOL(0)) {
+				currentChar = (game->gameBoard)[i][j + k];
+				if (SP_FIAR_GAME_PLAYER_1_SYMBOL == currentChar) {
 					currentSpanScore++;
-				} else if ((game->gameBoard)[i][j + k]
-												== SP_FIAR_GAME_PLAYERS_SYMBOL(1)){
+				} else if (SP_FIAR_GAME_PLAYER_2_SYMBOL == currentChar){
 					currentSpanScore--;
 				}
 			}
@@ -77,11 +77,10 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 		for (i = 0; i < SP_FIAR_GAME_N_ROWS - 3; i++) {
 			currentSpanScore = 0;
 			for (k = 0; k < 4; k++) {
-				if ((game->gameBoard)[i + k][j]
-						== SP_FIAR_GAME_PLAYERS_SYMBOL(0)) {
+				currentChar = (game->gameBoard)[i + k][j];
+				if (SP_FIAR_GAME_PLAYER_1_SYMBOL == currentChar) {
 					currentSpanScore++;
-				} else if ((game->gameBoard)[i][j + k]
-												== SP_FIAR_GAME_PLAYERS_SYMBOL(1)){
+				} else if (SP_FIAR_GAME_PLAYER_2_SYMBOL == currentChar){
 					currentSpanScore--;
 				}
 			}
@@ -104,11 +103,10 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 		for (j = 0; j < SP_FIAR_GAME_N_COLUMNS - 3; j++) {
 			currentSpanScore = 0;
 			for (k = 0; k < 4; k++) {
-				if ((game->gameBoard)[i + k][j + k]
-						== SP_FIAR_GAME_PLAYERS_SYMBOL(0)) {
+				currentChar = (game->gameBoard)[i + k][j + k];
+				if (SP_FIAR_GAME_PLAYER_1_SYMBOL == currentChar) {
 					currentSpanScore++;
-				} else if ((game->gameBoard)[i][j + k]
-												== SP_FIAR_GAME_PLAYERS_SYMBOL(1)){
+				} else if (SP_FIAR_GAME_PLAYER_2_SYMBOL == currentChar){
 					currentSpanScore--;
 				}
 			}
@@ -131,11 +129,10 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 		for (j = 3; j < SP_FIAR_GAME_N_COLUMNS; j++) {
 			currentSpanScore = 0;
 			for (k = 0; k < 4; k++) {
-				if ((game->gameBoard)[i + k][j - k]
-						== SP_FIAR_GAME_PLAYERS_SYMBOL(0)) {
+				currentChar = (game->gameBoard)[i + k][j - k];
+				if (SP_FIAR_GAME_PLAYER_1_SYMBOL == currentChar) {
 					currentSpanScore++;
-				} else if ((game->gameBoard)[i][j + k]
-												== SP_FIAR_GAME_PLAYERS_SYMBOL(1)){
+				} else if (SP_FIAR_GAME_PLAYER_2_SYMBOL == currentChar){
 					currentSpanScore--;
 				}
 			}
