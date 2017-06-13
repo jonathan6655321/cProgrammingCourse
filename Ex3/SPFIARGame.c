@@ -1,7 +1,7 @@
 #include "SPFIARGame.h"
 
-#define UNDO_MOVE_COMPUTER_STRING "Remove disc: remove computer’s disc at column %d\n"
-#define UNDO_MOVE_PLAYER_STRING "Remove disc: remove user’s disc at column %d\n"
+#define UNDO_MOVE_COMPUTER_STRING "Remove disc: remove computer's disc at column %d\n"
+#define UNDO_MOVE_PLAYER_STRING "Remove disc: remove user's disc at column %d\n"
 
 
 SPFiarGame* spFiarGameCreate(int historySize) {
