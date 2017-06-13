@@ -16,7 +16,7 @@
 #define GAME_OVER_TIE_STRING "Game over: it’s a tie\nPlease enter 'quit' to exit or 'restart' to start a new game!\n"
 #define SUGGEST_MOVE_STRING "Suggested move: drop a disc to column %d\n"
 #define COMPUTER_MOVE_STRING "Computer move: add disc to column %d\n"
-#define EXITING_STRING "Exiting…\n"
+#define EXITING_STRING "Exiting...\n"
 #define RESTARTING_STRING "Game restarted!\n"
 #define NO_HISTORY_ERROR_STRING "Error: cannot undo previous move!\n"
 #define NOT_ALLOWED_COMMANDS "Error: the game is over\n"
