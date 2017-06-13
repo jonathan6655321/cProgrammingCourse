@@ -12,6 +12,11 @@ SPMiniMaxNode* spMiniMaxNodeCreate(SPFiarGame* game, int currentHeight) {
 	minimaxnode->game = game;
 	minimaxnode->currentHeight = currentHeight;
 
+	minimaxnode->children = calloc(7, sizeof(SPFiarGame*));
+	if (!(minimaxnode->children)) {
+		printf(FUNCTION_ERROR, "calloc");
+		abort();
+	}
 	if (currentHeight != 0 && spFiarCheckWinner(game) == 0) {
 		for (int i = 0; i < 7; i++) {
 			if (spFiarGameIsValidMove(game, i)) {
@@ -36,12 +41,12 @@ void spMiniMaxNodeDestroy(SPMiniMaxNode* node) {
 			spMiniMaxNodeDestroy(node->children[i]);
 		}
 	}
+	free(node->children);
 	spFiarGameDestroy(node->game);
 	free(node);
 }
 
-int countHorizontalScore(SPFiarGame* game, int *spanScores)
-{
+int countHorizontalScore(SPFiarGame* game, int *spanScores) {
 	int i, j, k, currentSpanScore;
 	char currentChar;
 	for (i = 0; i < SP_FIAR_GAME_N_ROWS; i++) {
@@ -51,7 +56,7 @@ int countHorizontalScore(SPFiarGame* game, int *spanScores)
 				currentChar = (game->gameBoard)[i][j + k];
 				if (SP_FIAR_GAME_PLAYER_1_SYMBOL == currentChar) {
 					currentSpanScore++;
-				} else if (SP_FIAR_GAME_PLAYER_2_SYMBOL == currentChar){
+				} else if (SP_FIAR_GAME_PLAYER_2_SYMBOL == currentChar) {
 					currentSpanScore--;
 				}
 			}
@@ -71,8 +76,7 @@ int countHorizontalScore(SPFiarGame* game, int *spanScores)
 	return 0;
 }
 
-int countVerticalScore(SPFiarGame* game, int *spanScores)
-{
+int countVerticalScore(SPFiarGame* game, int *spanScores) {
 	// count vertical 4's:
 	int i, j, k, currentSpanScore;
 	char currentChar;
@@ -83,7 +87,7 @@ int countVerticalScore(SPFiarGame* game, int *spanScores)
 				currentChar = (game->gameBoard)[i + k][j];
 				if (SP_FIAR_GAME_PLAYER_1_SYMBOL == currentChar) {
 					currentSpanScore++;
-				} else if (SP_FIAR_GAME_PLAYER_2_SYMBOL == currentChar){
+				} else if (SP_FIAR_GAME_PLAYER_2_SYMBOL == currentChar) {
 					currentSpanScore--;
 				}
 			}
@@ -103,8 +107,7 @@ int countVerticalScore(SPFiarGame* game, int *spanScores)
 	return 0;
 }
 
-int countDiagonalScoreLeftToRight(SPFiarGame* game, int *spanScores)
-{
+int countDiagonalScoreLeftToRight(SPFiarGame* game, int *spanScores) {
 	// count diagonals 4's (top left to bottom right)
 	int i, j, k, currentSpanScore;
 	char currentChar;
@@ -115,7 +118,7 @@ int countDiagonalScoreLeftToRight(SPFiarGame* game, int *spanScores)
 				currentChar = (game->gameBoard)[i + k][j + k];
 				if (SP_FIAR_GAME_PLAYER_1_SYMBOL == currentChar) {
 					currentSpanScore++;
-				} else if (SP_FIAR_GAME_PLAYER_2_SYMBOL == currentChar){
+				} else if (SP_FIAR_GAME_PLAYER_2_SYMBOL == currentChar) {
 					currentSpanScore--;
 				}
 			}
@@ -135,8 +138,7 @@ int countDiagonalScoreLeftToRight(SPFiarGame* game, int *spanScores)
 	return 0;
 }
 
-int countDiagonalScoreRightToLeft(SPFiarGame* game, int *spanScores)
-{
+int countDiagonalScoreRightToLeft(SPFiarGame* game, int *spanScores) {
 	// count diagonals 4's (top right to bottom left)
 	int i, j, k, currentSpanScore;
 	char currentChar;
@@ -147,7 +149,7 @@ int countDiagonalScoreRightToLeft(SPFiarGame* game, int *spanScores)
 				currentChar = (game->gameBoard)[i + k][j - k];
 				if (SP_FIAR_GAME_PLAYER_1_SYMBOL == currentChar) {
 					currentSpanScore++;
-				} else if (SP_FIAR_GAME_PLAYER_2_SYMBOL == currentChar){
+				} else if (SP_FIAR_GAME_PLAYER_2_SYMBOL == currentChar) {
 					currentSpanScore--;
 				}
 			}
@@ -172,26 +174,22 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 	const int weights[6] = { -5, -2, -1, 1, 2, 5 };
 
 	int hor = countHorizontalScore(game, spanScores);
-	if (hor != 0)
-	{
+	if (hor != 0) {
 		return hor;
 	}
 
 	int ver = countVerticalScore(game, spanScores);
-	if (ver != 0)
-	{
+	if (ver != 0) {
 		return ver;
 	}
 
 	int diagLtR = countDiagonalScoreLeftToRight(game, spanScores);
-	if (diagLtR != 0)
-	{
+	if (diagLtR != 0) {
 		return diagLtR;
 	}
 
 	int diagRtL = countDiagonalScoreRightToLeft(game, spanScores);
-	if (diagRtL != 0)
-	{
+	if (diagRtL != 0) {
 		return diagRtL;
 	}
 

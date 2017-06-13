@@ -8,7 +8,7 @@ typedef struct SPMiniMaxNode {
 	SPFiarGame* game;
 	int currentHeight;
 	int utilityValue;
-	struct SPMiniMaxNode* children[7];
+	struct SPMiniMaxNode** children;
 } SPMiniMaxNode;
 
 

@@ -31,6 +31,7 @@ SPFiarGame* spFiarGameCopy(SPFiarGame* src) {
 	memcpy(dest->gameBoard, src->gameBoard,
 			SP_FIAR_GAME_N_ROWS * SP_FIAR_GAME_N_COLUMNS * sizeof(char));
 	memcpy(dest->tops, src->tops, SP_FIAR_GAME_N_COLUMNS * sizeof(int));
+	spArrayListDestroy(dest->history_turns_array);
 	dest->history_turns_array = spArrayListCopy(src->history_turns_array);
 	dest->currentPlayer = src->currentPlayer;
 	return dest;
