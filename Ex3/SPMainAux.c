@@ -21,7 +21,8 @@ void initializeGame(SPFiarGame** spfiargame, unsigned int* maxDepth) {
 		}
 	}
 
-	(*maxDepth) = (unsigned int) spPaserPraseInt(str);;
+	(*maxDepth) = (unsigned int) spPaserPraseInt(str);
+	;
 	(*spfiargame) = spFiarGameCreate(HISTORY_SIZE);
 }
 
@@ -80,5 +81,51 @@ int undoMove(SPFiarGame* spfiargame) {
 		printf(NO_HISTORY_ERROR_STRING);
 		return 0;
 	}
+	retMessage = spFiarGameUndoPrevMove(spfiargame);
+	if (retMessage == SP_FIAR_GAME_NO_HISTORY) {
+		printf(NO_HISTORY_ERROR_STRING);
+		return 0;
+	}
 	return 1;
+}
+
+void handleCommand(SPCommand spCommand, SPFiarGame** spfiargame,
+		int* gameIsRunning, int* needToPrint, unsigned int* maxDepth) {
+	switch (spCommand.cmd) {
+	case SP_ADD_DISC:
+		if (*gameIsRunning) {
+			(*needToPrint) = addDisk(spCommand, (*spfiargame), gameIsRunning,
+					(*maxDepth));
+		} else {
+			printf(NOT_ALLOWED_COMMANDS);
+		}
+		break;
+
+	case SP_SUGGEST_MOVE:
+		if (*gameIsRunning) {
+			int optimalMove = spMinimaxSuggestMove((*spfiargame), (*maxDepth));
+			printf(SUGGEST_MOVE_STRING, optimalMove + 1);
+		} else {
+			printf(NOT_ALLOWED_COMMANDS);
+		}
+		break;
+
+	case SP_UNDO_MOVE:
+		(*needToPrint) = undoMove((*spfiargame));
+		(*gameIsRunning) = 1;
+		break;
+
+	case SP_RESTART:
+		printf(RESTARTING_STRING);
+		initializeGame(spfiargame, maxDepth);
+		(*needToPrint) = 1;
+		(*gameIsRunning) = 1;
+		break;
+
+	case SP_INVALID_LINE:
+		printf(INVALID_COMMAND_STRING);
+		break;
+	default:
+		break;
+	}
 }

@@ -36,4 +36,6 @@ void addEnemyMove(SPFiarGame* spfiargame, int maxDepth);
 
 int undoMove(SPFiarGame* spfiargame);
 
+void handleCommand(SPCommand spCommand, SPFiarGame** spfiargame,
+		int* gameIsRunning, int* needToPrint, unsigned int* maxDepth);
 #endif

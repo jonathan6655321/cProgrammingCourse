@@ -12,7 +12,7 @@ SPMiniMaxNode* spMiniMaxNodeCreate(SPFiarGame* game, int currentHeight) {
 	minimaxnode->game = game;
 	minimaxnode->currentHeight = currentHeight;
 
-	if (currentHeight != 0) {
+	if (currentHeight != 0 && spFiarCheckWinner(game) == 0) {
 		for (int i = 0; i < 7; i++) {
 			if (spFiarGameIsValidMove(game, i)) {
 				SPFiarGame* spfiargame = spFiarGameCopy(game);
