@@ -13,7 +13,7 @@
 #define INVALID_COLOMN_NUMBER "Error: column number must be in range 1-7\n"
 #define GAME_OVER_PLAYER_1_WIN_STRING "Game over: you win\nPlease enter 'quit' to exit or 'restart' to start a new game!\n"
 #define GAME_OVER_PLAYER_2_WIN_STRING "Game over: computer wins\nPlease enter 'quit' to exit or 'restart' to start a new game!\n"
-#define GAME_OVER_TIE_STRING "Game over: it’s a tie\nPlease enter 'quit' to exit or 'restart' to start a new game!\n"
+#define GAME_OVER_TIE_STRING "Game over: it's a tie\nPlease enter 'quit' to exit or 'restart' to start a new game!\n"
 #define SUGGEST_MOVE_STRING "Suggested move: drop a disc to column %d\n"
 #define COMPUTER_MOVE_STRING "Computer move: add disc to column %d\n"
 #define EXITING_STRING "Exiting...\n"
