@@ -64,7 +64,7 @@ SPCommand spParserPraseLine(const char* str) {
 	}
 	token = strtok(NULL, delimeter);
 	if (spcommand.cmd == SP_ADD_DISC) {
-		spcommand.validArg = spParserIsInt(token);
+		spcommand.validArg = (spParserIsInt(token) && spPaserPraseInt(token) <= 7 && spPaserPraseInt(token) >= 1);
 		if (spcommand.validArg) {
 			spcommand.arg = spPaserPraseInt(token);
 		}
@@ -88,9 +88,9 @@ SP_COMMAND spPaserPraseCommand(char* str) {
 		return SP_ADD_DISC;
 	} else if (strcmp(str, "suggest_move") == 0) {
 		return SP_SUGGEST_MOVE;
-	} else if (strcmp(str, "quit") == 0) {
+	} else if (strcmp(str, "quit") == 0 || strcmp(str, "quit_game") == 0) {
 		return SP_QUIT;
-	} else if (strcmp(str, "restart") == 0) {
+	} else if (strcmp(str, "restart") == 0 || strcmp(str, "restart_game") == 0) {
 		return SP_RESTART;
 	} else {
 		return SP_INVALID_LINE;

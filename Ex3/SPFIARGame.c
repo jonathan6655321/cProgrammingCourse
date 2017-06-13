@@ -65,9 +65,9 @@ SP_FIAR_GAME_MESSAGE spFiarGameUndoPrevMove(SPFiarGame* src) {
 	src->gameBoard[src->tops[col]][col] = SP_FIAR_GAME_EMPTY_ENTRY;
 	src->currentPlayer = !src->currentPlayer;
 	if (src->currentPlayer) {
-		printf(UNDO_MOVE_COMPUTER_STRING, col);
+		printf(UNDO_MOVE_COMPUTER_STRING, col + 1);
 	} else {
-		printf(UNDO_MOVE_PLAYER_STRING, col);
+		printf(UNDO_MOVE_PLAYER_STRING, col + 1);
 	}
 	return SP_FIAR_GAME_SUCCESS;
 }
