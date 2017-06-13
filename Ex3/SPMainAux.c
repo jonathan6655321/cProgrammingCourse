@@ -11,7 +11,7 @@ void initializeGame(SPFiarGame** spfiargame, unsigned int* maxDepth) {
 		printf(EXITING_STRING);
 		exit(0);
 	}
-	while (!spParserIsInt(str)) {
+	while (!spParserIsInt(str) || spPaserPraseInt(str) > 7 || spPaserPraseInt(str) <= 0) {
 		printf(INVALID_DIFFICULTY_LEVEL_ERROR_STRING);
 		printf(DIFFICULTY_LEVEL_STRING);
 		fgets(str, sizeof(str), stdin);
@@ -21,7 +21,7 @@ void initializeGame(SPFiarGame** spfiargame, unsigned int* maxDepth) {
 		}
 	}
 
-	(*maxDepth) = (unsigned int) spPaserPraseInt(str);;
+	(*maxDepth) = (unsigned int) spPaserPraseInt(str);
 	(*spfiargame) = spFiarGameCreate(HISTORY_SIZE);
 }
 
