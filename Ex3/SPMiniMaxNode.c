@@ -178,7 +178,7 @@ int getNodeUtilityValue(SPMiniMaxNode* node) {
 			if (node->game->currentPlayer == 0) {
 				node->utilityValue = max;
 			} else {
-				node->utilityValue = max;
+				node->utilityValue = min;
 			}
 		}
 	}
