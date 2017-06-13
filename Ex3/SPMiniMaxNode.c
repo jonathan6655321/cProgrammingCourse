@@ -40,11 +40,8 @@ void spMiniMaxNodeDestroy(SPMiniMaxNode* node) {
 	free(node);
 }
 
-int calculateGameUtilityValue(SPFiarGame* game) {
-	int spanScores[6] = { 0, 0, 0, 0, 0, 0 }; // -3,-2,-1,1,2,3
-	int weights[6] = { -5, -2, -1, 1, 2, 5 };
-
-	// count horizontal 4's:
+int countHorizontalScore(SPFiarGame* game, int *spanScores)
+{
 	int i, j, k, currentSpanScore;
 	char currentChar;
 	for (i = 0; i < SP_FIAR_GAME_N_ROWS; i++) {
@@ -71,8 +68,14 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 			}
 		}
 	}
+	return 0;
+}
 
+int countVerticalScore(SPFiarGame* game, int *spanScores)
+{
 	// count vertical 4's:
+	int i, j, k, currentSpanScore;
+	char currentChar;
 	for (j = 0; j < SP_FIAR_GAME_N_COLUMNS; j++) {
 		for (i = 0; i < SP_FIAR_GAME_N_ROWS - 3; i++) {
 			currentSpanScore = 0;
@@ -97,8 +100,14 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 			}
 		}
 	}
+	return 0;
+}
 
+int countDiagonalScoreLeftToRight(SPFiarGame* game, int *spanScores)
+{
 	// count diagonals 4's (top left to bottom right)
+	int i, j, k, currentSpanScore;
+	char currentChar;
 	for (i = 0; i < SP_FIAR_GAME_N_ROWS - 3; i++) {
 		for (j = 0; j < SP_FIAR_GAME_N_COLUMNS - 3; j++) {
 			currentSpanScore = 0;
@@ -123,8 +132,14 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 			}
 		}
 	}
+	return 0;
+}
 
+int countDiagonalScoreRightToLeft(SPFiarGame* game, int *spanScores)
+{
 	// count diagonals 4's (top right to bottom left)
+	int i, j, k, currentSpanScore;
+	char currentChar;
 	for (i = 0; i < SP_FIAR_GAME_N_ROWS - 3; i++) {
 		for (j = 3; j < SP_FIAR_GAME_N_COLUMNS; j++) {
 			currentSpanScore = 0;
@@ -148,6 +163,36 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 				}
 			}
 		}
+	}
+	return 0;
+}
+
+int calculateGameUtilityValue(SPFiarGame* game) {
+	int spanScores[6] = { 0, 0, 0, 0, 0, 0 }; // -3,-2,-1,1,2,3
+	const int weights[6] = { -5, -2, -1, 1, 2, 5 };
+
+	int hor = countHorizontalScore(game, spanScores);
+	if (hor != 0)
+	{
+		return hor;
+	}
+
+	int ver = countHorizontalScore(game, spanScores);
+	if (ver != 0)
+	{
+		return ver;
+	}
+
+	int diagLtR = countDiagonalScoreLeftToRight(game, spanScores);
+	if (diagLtR != 0)
+	{
+		return diagLtR;
+	}
+
+	int diagRtL = countDiagonalScoreRightToLeft(game, spanScores);
+	if (diagRtL != 0)
+	{
+		return diagRtL;
 	}
 
 	int totalScore = 0;
