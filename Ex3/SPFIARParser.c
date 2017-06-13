@@ -31,7 +31,6 @@ bool spParserIsInt(const char* str) {
 }
 
 int spPaserPraseInt(char* str) {
-	printf("%s\n", str);
 	int len = strlen(str);
 	int x = 1;
 	int base = 10;
