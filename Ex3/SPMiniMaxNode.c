@@ -177,7 +177,7 @@ int calculateGameUtilityValue(SPFiarGame* game) {
 		return hor;
 	}
 
-	int ver = countHorizontalScore(game, spanScores);
+	int ver = countVerticalScore(game, spanScores);
 	if (ver != 0)
 	{
 		return ver;
