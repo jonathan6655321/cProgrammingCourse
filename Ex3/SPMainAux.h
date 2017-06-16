@@ -23,19 +23,46 @@
 #define NEXT_MOVE_STRING "Please make the next move:\n"
 #define COLUMN_FULL_ERROR_STRING "Error: column %d is full\n"
 
+/* a initializing function that ask the user to input maxDepth,
+ * and destroy last FIARGame and create a new one.
+ */
 void initializeGame(SPFiarGame** spfiargame, unsigned int* maxDepth);
 
+/* ask the user to input next command.
+ *
+ * return: the command after parsing.
+ */
 SPCommand getNextCommand();
 
+/*
+ * add user move to game board and then if no winner add enemy move.
+ *
+ * return: 0 if there's a winner, and 1 if not.
+ */
 int addDisk(SPCommand spCommand, SPFiarGame* spfiargame, int* gameIsRunning,
 		int maxDepth);
 
+/*
+ *check if there's a winner, and if so print the board and winning message and stop the game.
+ */
 void checkWinner(SPFiarGame* spfiargame, int* gameIsRunning);
 
+/*
+ * compute and add computer move to the game board.
+ */
 void addEnemyMove(SPFiarGame* spfiargame, int maxDepth);
 
+/*
+ * handle undo move command. undo 2 actions from the history (one user action and one of the computer action).
+ *
+ * return: 1 if successfully undo move, and 0 if not.
+ */
 int undoMove(SPFiarGame* spfiargame);
 
+/* get SPCommand and handle it with the needed action.
+ *
+ * change gameIsRunning, needToPrint, maxDepth as needed.
+ */
 void handleCommand(SPCommand spCommand, SPFiarGame** spfiargame,
 		int* gameIsRunning, int* needToPrint, unsigned int* maxDepth);
 #endif
