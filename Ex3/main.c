@@ -9,6 +9,7 @@ int main() {
 	int needToPrint = 1;
 	SPCommand spCommand;
 
+
 	//gameLoop
 	spCommand.cmd = SP_INVALID_LINE;
 	while (spCommand.cmd != SP_QUIT) {
